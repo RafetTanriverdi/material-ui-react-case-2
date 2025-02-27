@@ -1,12 +1,11 @@
-import { Outlet } from 'react-router-dom'
+import { Navigate, Outlet } from "react-router-dom";
 
 const Index = () => {
-  return (
-    <div>Index
+  const isAuthenticated =true;
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return <Outlet />;
+};
 
-        <Outlet />
-    </div>
-  )
-}
-
-export default Index
+export default Index;

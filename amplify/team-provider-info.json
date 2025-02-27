@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-case2materialui-dev-ec6e4-authRole",
+      "UnauthRoleArn": "arn:aws:iam::895476881817:role/amplify-case2materialui-dev-ec6e4-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::895476881817:role/amplify-case2materialui-dev-ec6e4-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-case2materialui-dev-ec6e4-deployment",
+      "UnauthRoleName": "amplify-case2materialui-dev-ec6e4-unauthRole",
+      "StackName": "amplify-case2materialui-dev-ec6e4",
+      "StackId": "arn:aws:cloudformation:us-east-1:895476881817:stack/amplify-case2materialui-dev-ec6e4/fccae7f0-f4ec-11ef-9e30-12885d0a2b41",
+      "AmplifyAppId": "dpgik5mp0iofq"
+    },
+    "categories": {
+      "auth": {
+        "case2materialuib4a8f3d4": {}
+      }
+    }
+  }
+}

@@ -1,8 +1,22 @@
-
-const CategoriesPage = () => {
-  return (
-    <div>CategoriesPage</div>
-  )
+import { Button } from "@mui/material";
+import { RouteType } from "@rt/routes/routes";
+import * as React from "react";
+interface CategoriesPageProps {
+  routeData: RouteType;
 }
 
-export default CategoriesPage
+const CategoriesPage: React.FC<CategoriesPageProps> = ({ routeData }) => {
+  console.log(routeData);
+  return (
+    <>
+
+    <Button>
+      sdasda
+    </Button>
+    
+      <div>CategoriesPage</div>
+    </>
+  );
+};
+
+export default CategoriesPage;

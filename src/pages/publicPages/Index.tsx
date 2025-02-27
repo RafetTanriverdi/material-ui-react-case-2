@@ -1,12 +1,12 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div>Index
-
+    <div>
+      Index
         <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
