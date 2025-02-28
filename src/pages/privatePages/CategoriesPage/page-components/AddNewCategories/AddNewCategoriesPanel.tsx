@@ -1,4 +1,4 @@
-import { RTInput } from "@rt/components/Inputs";
+import { RTInput } from "@rt/components/Inputs/Index";
 import { Category } from "@rt/pages/privatePages/CategoriesPage/page-components/AddNewCategories/AddNewCategoriesDrawer";
 
 const AddNewCategoriesPanel = ({

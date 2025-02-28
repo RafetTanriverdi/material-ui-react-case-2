@@ -2,7 +2,6 @@ import React from "react";
 import { Box, CssBaseline } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-// Styled Main Layout Container
 const LayoutContainer = styled(Box)(({ theme }) => ({
   minHeight: "100vh",
   backgroundColor: '#f5f5f5',
