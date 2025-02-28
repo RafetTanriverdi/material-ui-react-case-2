@@ -1,5 +1,4 @@
-import React from "react";
-import { useRouteError, Link } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 
 const ErrorPage: React.FC = () => {
   const error = useRouteError() as { message?: string }; 

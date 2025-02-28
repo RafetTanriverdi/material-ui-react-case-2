@@ -1,20 +1,19 @@
-import { Button } from "@mui/material";
+import CategoriesList from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/CategoriesList";
 import { RouteType } from "@rt/routes/routes";
 import * as React from "react";
+import { Helmet } from "react-helmet";
+
 interface CategoriesPageProps {
   routeData: RouteType;
 }
 
 const CategoriesPage: React.FC<CategoriesPageProps> = ({ routeData }) => {
-  console.log(routeData);
   return (
     <>
-
-    <Button>
-      sdasda
-    </Button>
-    
-      <div>CategoriesPage</div>
+      <Helmet>
+        <title>{routeData?.title}</title>
+      </Helmet>
+      <CategoriesList />
     </>
   );
 };
