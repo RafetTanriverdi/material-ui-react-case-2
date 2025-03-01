@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import StyledDrawer from "@rt/components/Drawer/Drawer";
 import EditCategoriesPanel from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/Panels/EditCategoriesPanel";
-import { CategoryList } from "@rt/context/CategoryContext/CategoryContext";
 import { Category } from "@rt/pages/privatePages/CategoriesPage/page-components/AddNewCategories/AddNewCategoriesDrawer";
 import { useEdit } from "@rt/hooks/crudFunctions/useEdit";
-import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
 import { ENDPOINTS } from "@rt/api/end-points";
 import { RTButton } from "@rt/components/Buttons/Index";
+import { CategoryList } from "@rt/context/CategoryContext/CategoryContext";
+import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
 
 interface EditCategoriesDrawerProps {
   open: boolean;

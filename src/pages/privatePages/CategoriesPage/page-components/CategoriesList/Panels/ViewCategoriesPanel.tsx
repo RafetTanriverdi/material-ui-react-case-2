@@ -2,8 +2,8 @@ import { ENDPOINTS } from "@rt/api/end-points";
 import { RTAlert } from "@rt/components/Alerts/Index";
 import Description from "@rt/components/Description/Description";
 import { RTLoading } from "@rt/components/Loading/Index";
-import { CategoryList } from "@rt/context/CategoryContext/CategoryContext";
 import { useGet } from "@rt/hooks/crudFunctions/useGet";
+import { CategoryList } from "@rt/context/CategoryContext/CategoryContext";
 
 interface ViewCategoriesPanelProps {
   data: CategoryList;

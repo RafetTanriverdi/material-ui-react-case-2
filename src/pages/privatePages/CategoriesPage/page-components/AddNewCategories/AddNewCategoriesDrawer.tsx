@@ -3,8 +3,8 @@ import { RTButton } from "@rt/components/Buttons/Index";
 import StyledDrawer from "@rt/components/Drawer/Drawer";
 import AddNewCategoriesPanel from "@rt/pages/privatePages/CategoriesPage/page-components/AddNewCategories/AddNewCategoriesPanel";
 import { CrudEntity, useAdd } from "@rt/hooks/crudFunctions/useAdd";
-import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
 import { ENDPOINTS } from "@rt/api/end-points";
+import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
 
 export interface Category extends CrudEntity {
   categoryName: string;

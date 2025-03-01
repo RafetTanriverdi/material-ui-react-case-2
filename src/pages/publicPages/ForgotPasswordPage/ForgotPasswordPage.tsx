@@ -6,11 +6,12 @@ import { Stepper, Step, StepLabel, Typography, Stack } from "@mui/material";
 import { RTButton } from "@rt/components/Buttons/Index";
 import { RTForm } from "@rt/components/Form/Index";
 import { RTInput } from "@rt/components/Inputs/Index";
+import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
+
 import {
   useForgotPassword,
   useResetPassword,
 } from "@rt/hooks/authFunctions/useAuthMutations";
-import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
 
 const ForgotPasswordPage = () => {
   const navigate = useNavigate();

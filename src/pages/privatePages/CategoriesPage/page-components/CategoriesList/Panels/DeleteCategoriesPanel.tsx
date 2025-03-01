@@ -1,5 +1,5 @@
-import Description from "@rt/components/Description/Description";
 import { CategoryList } from "@rt/context/CategoryContext/CategoryContext";
+import Description from "@rt/components/Description/Description";
 
 interface DeleteCategoriesPanelProps {
   data: CategoryList;
