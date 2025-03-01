@@ -8,7 +8,7 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
-    "types": ["node"],
+
 
     /* Bundler mode */
     "moduleResolution": "node",
