@@ -3,7 +3,7 @@ import { RTButton } from "@rt/components/Buttons/Index";
 import StyledDrawer from "@rt/components/Drawer/Drawer";
 import AddNewCategoriesPanel from "@rt/pages/privatePages/CategoriesPage/page-components/AddNewCategories/AddNewCategoriesPanel";
 import { CrudEntity, useAdd } from "@rt/hooks/crudFunctions/useAdd";
-import { useGlobalSnackbar } from "@rt/Context/GlobalSnackbarProvider/GlobalSnackbarProvider";
+import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
 import { ENDPOINTS } from "@rt/api/end-points";
 
 export interface Category extends CrudEntity {
@@ -55,6 +55,7 @@ const AddNewCategoriesDrawer: React.FC<AddNewCategoriesDrawerProps> = ({
         }
         footer={
           <RTButton.add
+            disabled={addMutation.isPending}
             loading={addMutation.isPending}
             onClick={() => addMutation.mutate(category)}
           >

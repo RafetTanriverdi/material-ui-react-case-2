@@ -41,6 +41,12 @@ export const routes: RouteType[] = [
     filePath: "publicPages/Index",
     children: [
       {
+        id: ROUTES_ID.forgotpassword,
+        filePath: "publicPages/ForgotPasswordPage/ForgotPasswordPage",
+        title: "Forgot Password",
+        path: "/forgotpassword",
+      },
+      {
         id: ROUTES_ID.login,
         filePath: "publicPages/LoginPage/LoginPage",
         title: "Login",
@@ -56,12 +62,10 @@ export const routes: RouteType[] = [
   },
 ];
 
-
 export const FLAT_ROUTES = flattenRoutes(routes);
 const ROUTE_ID_MAP: Record<string, RouteType> = {};
 FLAT_ROUTES.map((el) => (ROUTE_ID_MAP[el.id] = el));
 
-console.log(ROUTE_ID_MAP,'ROUTE_ID_MAP');
 
 export const getRoutePath = (routeId: string): string => {
   const routeInfo = ROUTE_ID_MAP[routeId];
@@ -72,7 +76,6 @@ export const getRoutePath = (routeId: string): string => {
 };
 
 export const getRouteId = (path: string): string => {
-
   const routeInfo = FLAT_ROUTES.find((el) => el.path === path);
   if (routeInfo) {
     return routeInfo.id;

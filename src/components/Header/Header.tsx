@@ -1,27 +1,27 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { getRoutePath } from "@rt/routes/routes";
 import { ROUTES_ID } from "@rt/routes/routes-id";
 import { useMutation } from "@tanstack/react-query";
 import { signOut } from "aws-amplify/auth";
+import { RTButton } from "@rt/components/Buttons/Index";
+import { Menu } from "@mui/icons-material";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import {
+  AppBar,
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
 }
 
@@ -52,17 +52,19 @@ export default function DrawerAppBar(props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
-      <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item.id} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item.id} />
-            </ListItemButton>
-          </ListItem>
+          <>
+            <ListItem key={item.id} disablePadding>
+              <ListItemButton
+                sx={{ textAlign: "start" }}
+                onClick={() => navigate(getRoutePath(item.id))}
+              >
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+          </>
         ))}
       </List>
     </Box>
@@ -75,12 +77,11 @@ export default function DrawerAppBar(props: Props) {
     mutationKey: ["signOut"],
     mutationFn: async () => {
       const response = await signOut();
-      console.log(response);
       return response;
     },
     onSuccess: () => {
       navigate(getRoutePath(ROUTES_ID.login));
-    }
+    },
   });
 
   return (
@@ -94,27 +95,24 @@ export default function DrawerAppBar(props: Props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
-            =
+            <Menu />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            MUI
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            DATAFLOWX
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button
+              <RTButton.link
                 key={item.id}
-                sx={{ color: "#fff" }}
                 onClick={() => navigate(getRoutePath(item.id))}
               >
                 {item.title}
-              </Button>
+              </RTButton.link>
             ))}
-            <Button    sx={{ color: "#fff" }}onClick={() => mutation.mutate()}>Sign Out</Button>
           </Box>
+          <IconButton color="inherit" onClick={() => mutation.mutate()}>
+            <LogoutOutlinedIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <nav>

@@ -28,14 +28,13 @@ export const useAdd = <T extends CrudEntity>({
       return response.data;
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [`${invalidationKey}`] });
+      queryClient.invalidateQueries({ queryKey: [`list-${invalidationKey}`] });
 
       if (onSuccess) {
         onSuccess(data);
       }
     },
     onError: (error) => {
-      console.error("Creation failed:", error);
 
       if (onError) {
         onError(error);

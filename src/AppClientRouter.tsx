@@ -8,7 +8,7 @@ import App from "./App";
 import { routes, RouteType } from "@rt/routes/routes";
 import ErrorBoundryPage from "@rt/pages/otherPages/ErrorBoundryPage/ErrorBoundryPage";
 import ErrorPage from "@rt/pages/otherPages/ErrorPage/ErrorPage";
-import PageSpin from "@rt/components/Spiner/PageSpin/PageSpin";
+import { RTLoading } from "@rt/components/Loading/Index";
 
 const AppClientRouter = () => {
   const pages = import.meta.glob("./pages/**/*.tsx");
@@ -26,7 +26,7 @@ const AppClientRouter = () => {
     return {
       path: route.path,
       element: (
-        <Suspense fallback={<PageSpin />}>
+        <Suspense fallback={<RTLoading.page />}>
           <PageComponent routeData={route} />
         </Suspense>
       ),
@@ -38,7 +38,7 @@ const AppClientRouter = () => {
     {
       errorElement: <ErrorPage />,
       element: (
-        <Suspense fallback={<PageSpin />}>
+        <Suspense fallback={<RTLoading.page />}>
           <ErrorBoundryPage>
             <App />
           </ErrorBoundryPage>

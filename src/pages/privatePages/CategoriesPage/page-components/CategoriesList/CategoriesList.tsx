@@ -1,46 +1,63 @@
-import { Stack, Typography } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
+import { RTAlert } from "@rt/components/Alerts/Index";
 import { RTButton } from "@rt/components/Buttons/Index";
+import { RTLoading } from "@rt/components/Loading/Index";
 import Table from "@rt/components/Table/Table";
-import AddNewCatgoriesButton from "@rt/pages/privatePages/CategoriesPage/page-components/AddNewCategories/AddNewCatgoriesButton";
+import {
+  CategoryList,
+  useCategoryContext,
+} from "@rt/context/CategoryContext/CategoryContext";
 import DeleteCategoriesDrawer from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/Drawers/DeleteCategoriesDrawer";
 import EditCategoriesDrawer from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/Drawers/EditCategoriesDrawer";
 import ViewCategoriesDrawer from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/Drawers/ViewCategoriesDrawer";
 import { TableView } from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/TableView";
+import dayjs from "dayjs";
 import React, { useState } from "react";
 
-interface TableActionsProps {
-  data: {
-    id: number;
-    name: string;
-    description: string;
-  };
+export interface TableActionsProps {
+  data: CategoryList;
 }
 
 const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 70, flex: 1 },
-  { field: "firstName", headerName: "First name", width: 130, flex: 1 },
   {
-    field: "lastName",
-    headerName: "Last name",
-    width: 130,
+    field: "categoryName",
+    headerName: "Category Name",
+    minWidth: 130,
     flex: 1,
   },
   {
-    field: "age",
-    headerName: "Age",
-    width: 130,
+    field: "description",
+    headerName: "Description",
+    minWidth: 130,
     flex: 1,
   },
   {
-    field: "fullName",
-    headerName: "Full name",
+    field: "productAmount",
+    headerName: "Product Amount",
     description: "This column has a value getter and is not sortable.",
     sortable: false,
-    width: 160,
-    valueGetter: (_value, row) =>
-      `${row.firstName || ""} ${row.lastName || ""}`,
+    minWidth: 160,
     flex: 1,
+  },
+  {
+    field: "createdDate",
+    headerName: "Created",
+    minWidth: 130,
+    flex: 1,
+    renderCell: ({ value }) => {
+      return dayjs(value).format("DD/MM/YYYY - HH:mm");
+    },
+  },
+  {
+    field: "updatedDate",
+    headerName: "Updated",
+    description: "This column has a value getter and is not sortable.",
+    sortable: false,
+    minWidth: 160,
+    flex: 1,
+    renderCell: ({ value }) => {
+      return dayjs(value).format("DD/MM/YYYY - HH:mm");
+    },
   },
   {
     flex: 1.5,
@@ -49,27 +66,11 @@ const columns: GridColDef[] = [
     type: "actions",
     filterable: false,
     sortable: false,
-    width: 160,
+    minWidth: 160,
     renderCell: ({ row }) => {
-      console.log(row);
       return <TableActions data={row} />;
     },
   },
-];
-
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: 123 },
-  { id: 6, lastName: "Melisandre", firstName: "sdfs", age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  { id: 10, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 11, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 12, lastName: "Lannister", firstName: "Jaime", age: 45 },
 ];
 
 const TableActions: React.FC<TableActionsProps> = ({ data }) => {
@@ -118,15 +119,19 @@ const TableActions: React.FC<TableActionsProps> = ({ data }) => {
 };
 
 const CategoriesList = () => {
-  return (
-    <>
-      <Stack direction={"row"} justifyContent="space-between">
-        <Typography variant="h6"   >Categories</Typography>
-        <AddNewCatgoriesButton/>
-      </Stack>
-      <Table columns={columns} rows={rows} />
-    </>
-  );
+  const { data, isLoading, isError, error } = useCategoryContext();
+
+  const rows =
+    data
+      ?.sort(
+        (a, b) =>
+          dayjs(b.createdDate).valueOf() - dayjs(a.createdDate).valueOf()
+      )
+      .map((e) => ({ ...e, id: e.categoryId })) ?? [];
+
+  if (isLoading) return <RTLoading.table />;
+  if (isError) return <RTAlert.error message={error} />;
+  return <Table columns={columns} rows={rows} />;
 };
 
 export default CategoriesList;

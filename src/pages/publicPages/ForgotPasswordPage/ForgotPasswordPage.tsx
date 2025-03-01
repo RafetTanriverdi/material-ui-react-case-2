@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 import { getRoutePath } from "@rt/routes/routes";
 import { ROUTES_ID } from "@rt/routes/routes-id";
@@ -8,31 +7,39 @@ import { RTButton } from "@rt/components/Buttons/Index";
 import { RTForm } from "@rt/components/Form/Index";
 import { RTInput } from "@rt/components/Inputs/Index";
 import {
-  useRegister,
-  useVerifyCode,
+  useForgotPassword,
+  useResetPassword,
 } from "@rt/hooks/authFunctions/useAuthMutations";
 import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
 
-const RegisterPage = () => {
+const ForgotPasswordPage = () => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [deliveryMedium, setDeliveryMedium] = useState("");
 
+  const forgotPasswordMutation = useForgotPassword();
+  const resetPasswordMutation = useResetPassword();
   const { showSnackbar } = useGlobalSnackbar();
 
-  const signUpMutation = useRegister();
-  const verifyMutation = useVerifyCode();
-
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleForgotPassword = (e: React.FormEvent) => {
     e.preventDefault();
-    signUpMutation.mutate(
-      { email, password },
+    forgotPasswordMutation.mutate(
+      { email },
       {
-        onSuccess: () => {
-          setActiveStep(1);
-          showSnackbar("Verification code sent to your email", "success");
+        onSuccess: (data) => {
+          showSnackbar("Code sent successfully", "success");
+          if (
+            data.nextStep.resetPasswordStep ===
+            "CONFIRM_RESET_PASSWORD_WITH_CODE"
+          ) {
+            setDeliveryMedium(
+              data.nextStep.codeDeliveryDetails?.deliveryMedium || ""
+            );
+            setActiveStep(1);
+          }
         },
         onError: (error) => {
           showSnackbar(error.message, "error");
@@ -41,14 +48,14 @@ const RegisterPage = () => {
     );
   };
 
-  const handleVerifyCode = (e: React.FormEvent) => {
+  const handleResetPassword = (e: React.FormEvent) => {
     e.preventDefault();
-    verifyMutation.mutate(
-      { email, code: verificationCode },
+    resetPasswordMutation.mutate(
+      { email, code: verificationCode, newPassword },
       {
         onSuccess: () => {
           navigate(getRoutePath(ROUTES_ID.login));
-          showSnackbar("Account verified successfully", "success");
+          showSnackbar("Password reset successfully", "success");
         },
         onError: (error) => {
           showSnackbar(error.message, "error");
@@ -61,22 +68,21 @@ const RegisterPage = () => {
     <RTForm.container>
       <RTForm.card>
         <Typography variant="h5" fontWeight="bold" textAlign="center">
-          Register
+          Forgot Password
         </Typography>
 
         <Stepper activeStep={activeStep} sx={{ marginBottom: 3 }}>
           <Step>
-            <StepLabel>Sign Up</StepLabel>
+            <StepLabel>Enter Email</StepLabel>
           </Step>
           <Step>
-            <StepLabel>Verify Code</StepLabel>
+            <StepLabel>Reset Password</StepLabel>
           </Step>
         </Stepper>
 
         {activeStep === 0 && (
-          <form onSubmit={handleSignUp}>
+          <form onSubmit={handleForgotPassword}>
             <RTInput.text
-              style={{ margin: "10px 0" }}
               fullWidth
               label="Email"
               variant="outlined"
@@ -84,46 +90,52 @@ const RegisterPage = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <RTInput.text
-              fullWidth
-              label="Password"
-              type="password"
-              variant="outlined"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
             <RTButton.login
               fullWidth
               variant="contained"
               type="submit"
-              disabled={signUpMutation.isPending}
+              disabled={forgotPasswordMutation.isPending}
+              loading={forgotPasswordMutation.isPending}
             >
-              {signUpMutation.isPending ? "Registering..." : "Register"}
+              Send Code
             </RTButton.login>
           </form>
         )}
 
         {activeStep === 1 && (
-          <form onSubmit={handleVerifyCode}>
+          <form onSubmit={handleResetPassword}>
+            <Typography variant="body2" color="textSecondary">
+              {`A confirmation code was sent via ${deliveryMedium}.`}
+            </Typography>
             <RTInput.text
-              style={{ margin: "10px 0" }}
               fullWidth
               label="Verification Code"
               variant="outlined"
+              type="number"
+              inputMode="numeric"
               value={verificationCode}
               onChange={(e) => setVerificationCode(e.target.value)}
               required
-              type="number"
-              inputMode="numeric"
+              autoComplete="off"
+            />
+            <RTInput.text
+              fullWidth
+              label="New Password"
+              type="password"
+              variant="outlined"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+              autoComplete="off"
             />
             <RTButton.login
               fullWidth
               variant="contained"
               type="submit"
-              disabled={verifyMutation.isPending}
+              disabled={resetPasswordMutation.isPending}
+              loading={resetPasswordMutation.isPending}
             >
-              {verifyMutation.isPending ? "Verifying..." : "Verify Code"}
+              Reset Password
             </RTButton.login>
           </form>
         )}
@@ -134,7 +146,7 @@ const RegisterPage = () => {
           alignItems="center"
           height={20}
         >
-          <Typography>Already have an account?</Typography>
+          <Typography>Remembered your password?</Typography>
           <RTButton.action
             underline="none"
             onClick={() => navigate(getRoutePath(ROUTES_ID.login))}
@@ -147,4 +159,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default ForgotPasswordPage;

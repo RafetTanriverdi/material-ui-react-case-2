@@ -1,5 +1,7 @@
 import StyledDrawer from "@rt/components/Drawer/Drawer";
+import { CategoryList } from "@rt/context/CategoryContext/CategoryContext";
 import ViewCategoriesPanel from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/Panels/ViewCategoriesPanel";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ViewCategoriesDrawer = ({
   open,
@@ -8,18 +10,20 @@ const ViewCategoriesDrawer = ({
 }: {
   open: boolean;
   onClose: () => void;
-  data: {
-    id: number;
-    name: string;
-    description: string;
-  };
+  data: CategoryList;
 }) => {
+  const queryClient = useQueryClient();
+  const handleClose = () => {
+    onClose();
+    queryClient.removeQueries({ queryKey: [`get-${data.categoryName}`] });
+  };
+  
   return (
     <StyledDrawer
-      title={`View Category: ${data.id}`}
+      title={`View Category: ${data.categoryName}`}
       open={open}
-      onClose={onClose}
-      content={<ViewCategoriesPanel />}
+      onClose={handleClose}
+      content={<ViewCategoriesPanel data={data} />}
     />
   );
 };

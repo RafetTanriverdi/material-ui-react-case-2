@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React, { ErrorInfo, ReactNode } from "react";
 
 interface ErrorBoundaryProps {
@@ -8,18 +9,19 @@ interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundary extends React.Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   state: ErrorBoundaryState = { hasError: false };
   constructor(public props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }
 
-
   static getDerivedStateFromError(): ErrorBoundaryState {
     return { hasError: true };
   }
-
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("Component error caught:", error, errorInfo);
@@ -27,7 +29,17 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
   render() {
     if (this.state.hasError) {
-      return <h2>An error occurred while loading this component.</h2>;
+      return (
+        <>
+          <h1>Oops! An error occurred.</h1>
+          <Button
+            variant="contained"
+            onClick={() => window.location.replace("/")}
+          >
+            GO HOME
+          </Button>
+        </>
+      );
     }
 
     return this.props.children;

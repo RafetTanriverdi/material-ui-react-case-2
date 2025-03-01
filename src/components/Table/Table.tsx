@@ -13,12 +13,7 @@ const Table = ({
   paginationModel = { pageSize: 10, page: 0 },
 }: {
   columns: GridColDef[];
-  rows: Array<{
-    id: number | string;
-    lastName?: string;
-    firstName?: string;
-    age?: number;
-  }>;
+  rows: Array<Record<string,unknown>>;
   paginationModel?: { pageSize: number; page: number };
 }) => {
   return (

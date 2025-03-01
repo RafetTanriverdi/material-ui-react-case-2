@@ -1,90 +1,48 @@
 import { useState } from "react";
-import {
-  TextField,
-  Typography,
-  Box,
-  CircularProgress,
-  styled,
-  Container,
-} from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import { RTButton } from "@rt/components/Buttons/Index";
-import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { getRoutePath } from "@rt/routes/routes";
 import { ROUTES_ID } from "@rt/routes/routes-id";
-import { signIn } from "aws-amplify/auth";
-
-// Styled container for the form
-const FormContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  gap: "16px",
-  padding: "32px",
-  borderRadius: "8px",
-  boxShadow:
-    theme.palette.mode === "light"
-      ? "0px 4px 12px rgba(0,0,0,0.1)"
-      : "0px 4px 12px rgba(255,255,255,0.1)",
-  backgroundColor: theme.palette.background.paper,
-  transition: "all 0.3s ease-in-out",
-  width: "100%",
-  maxWidth: "400px",
-  height: "60%",
-}));
+import { RTForm } from "@rt/components/Form/Index";
+import { RTInput } from "@rt/components/Inputs/Index";
+import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
+import { useLogin } from "@rt/hooks/authFunctions/useAuthMutations";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const mutation = useMutation({
-    mutationKey: ["login"],
-    mutationFn: async () => {
-      const response = await signIn({ username: email, password: password });
-      console.log(response);
-      return response;
-    },
-    onSuccess: () => {
-      navigate(getRoutePath(ROUTES_ID.dashboard));
-    },
-    onError: (error) => {
-      console.log(error);
-      setError(error.message);
-    },
-  });
+  const { showSnackbar } = useGlobalSnackbar();
+
+  const login = useLogin();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    login.mutate(
+      { email, password },
+      {
+        onSuccess: () => {
+          navigate(getRoutePath(ROUTES_ID.dashboard));
+          showSnackbar("Login successful", "success");
+        },
+        onError: (error) => {
+          showSnackbar(error.message, "error");
+        },
+      }
+    );
+  };
+
   return (
-    <Container
-      maxWidth="xl"
-      style={{
-        height: "100vh",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <FormContainer>
+    <RTForm.container>
+      <RTForm.card>
         <Typography variant="h5" fontWeight="bold" textAlign="center">
           Login
         </Typography>
 
-        {error && (
-          <Typography color="error" textAlign="center">
-            {error}
-          </Typography>
-        )}
-
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            mutation.mutate();
-          }}
-        >
-          <TextField
-            style={{ margin: " 10px 0" }}
+        <form onSubmit={handleSubmit}>
+          <RTInput.text
             fullWidth
             label="Email"
             variant="outlined"
@@ -92,7 +50,7 @@ const LoginPage = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <TextField
+          <RTInput.text
             fullWidth
             label="Password"
             type="password"
@@ -105,18 +63,34 @@ const LoginPage = () => {
             fullWidth
             variant="contained"
             type="submit"
-            disabled={mutation.isPending}
-            loading={mutation.isPending}
+            disabled={login.isPending}
+            loading={login.isPending}
           >
-            {mutation.isPending ? (
-              <CircularProgress size={24} color="inherit" />
-            ) : (
-              "Login"
-            )}
+            Login
           </RTButton.login>
         </form>
-      </FormContainer>
-    </Container>
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          height={10}
+        >
+          <Typography>Don't have an account?</Typography>
+          <RTButton.action
+            underline="none"
+            onClick={() => navigate(getRoutePath(ROUTES_ID.register))}
+          >
+            Register
+          </RTButton.action>
+        </Stack>
+        <RTButton.action
+          underline="none"
+          onClick={() => navigate(getRoutePath(ROUTES_ID.forgotpassword))}
+        >
+          Forgot Password
+        </RTButton.action>
+      </RTForm.card>
+    </RTForm.container>
   );
 };
 

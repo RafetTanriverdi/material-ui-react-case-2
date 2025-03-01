@@ -33,7 +33,12 @@ const StyledDrawer = ({
   return (
     <>
       <Drawer anchor="right" open={open} onClose={onClose}>
-        <Box width={600} height="100vh" display="flex" flexDirection="column">
+        <Box
+          sx={{ width: { xs: "100%", sm: 400, md: 600 } }}
+          height="100vh"
+          display="flex"
+          flexDirection="column"
+        >
           <DrawerHeader>
             {title && <Typography variant="h6">{title}</Typography>}
             <IconButton onClick={onClose}>

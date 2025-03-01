@@ -1,5 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import { Snackbar, Alert } from "@mui/material";
 
 type SnackbarSeverity = "success" | "error" | "warning" | "info";
@@ -19,25 +25,27 @@ export const GlobalSnackbarProvider: React.FC<{
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState<SnackbarSeverity>("info");
 
-  const showSnackbar = (
-    snackbarMessage: string,
-    snackbarSeverity: SnackbarSeverity = "info"
-  ) => {
-    setMessage(snackbarMessage);
-    setSeverity(snackbarSeverity);
-    setOpen(true);
-  };
+  const showSnackbar = useCallback(
+    (snackbarMessage: string, snackbarSeverity: SnackbarSeverity = "info") => {
+      setMessage(snackbarMessage);
+      setSeverity(snackbarSeverity);
+      setOpen(true);
+    },
+    []
+  );
 
-  const handleClose = (
-    _event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") return;
-    setOpen(false);
-  };
+  const handleClose = useCallback(
+    (_event?: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === "clickaway") return;
+      setOpen(false);
+    },
+    []
+  );
+
+  const contextValue = useMemo(() => ({ showSnackbar }), [showSnackbar]);
 
   return (
-    <SnackbarContext.Provider value={{ showSnackbar }}>
+    <SnackbarContext.Provider value={contextValue}>
       {children}
       <Snackbar
         open={open}
