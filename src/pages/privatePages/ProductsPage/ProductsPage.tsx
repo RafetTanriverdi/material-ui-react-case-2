@@ -1,18 +1,33 @@
-import { useState } from "react";
+import { Stack, Typography } from "@mui/material";
+import AddNewProductsButton from "@rt/pages/privatePages/ProductsPage/page-components/AddNewProducts/AddNewProductsButton";
+import ProductsList from "@rt/pages/privatePages/ProductsPage/page-components/ProductsList/ProductsList";
+import { RouteType } from "@rt/routes/routes";
+import React from "react";
+import { Helmet } from "react-helmet";
 
-const ProductsPage = () => {
-  const [hasError, setHasError] = useState(false);
-
-  if (hasError) {
-    throw new Error("This is a test error!"); // Simulating an error
-  }
-
-  return (
-    <div>
-      <h2>No errors yet!</h2>
-      <button onClick={() => setHasError(true)}>Trigger Error</button>
-    </div>
-  )
+interface ProductsPageProps {
+  routeData: RouteType;
 }
 
-export default ProductsPage
+const ProductsPage: React.FC<ProductsPageProps> = ({ routeData }) => {
+  return (
+    <>
+      <Helmet>
+        <title>{routeData?.title}</title>
+      </Helmet>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignContent={"center"}
+      >
+        <Typography variant="h6" margin={"auto 0"}>
+          Products
+        </Typography>
+        <AddNewProductsButton />
+      </Stack>
+      <ProductsList />
+    </>
+  );
+};
+
+export default ProductsPage;

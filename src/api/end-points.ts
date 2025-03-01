@@ -13,4 +13,11 @@ export const ENDPOINTS = {
     DELETE: "/products/:productId",
     GET: "/products/:productId",
   },
+  USERS: {
+    LIST: "/users",
+    CREATE: "/users",
+    UPDATE: "/users/:userId",
+    DELETE: "/users/:userId",
+    GET: "/users/:userId",
+  },
 };

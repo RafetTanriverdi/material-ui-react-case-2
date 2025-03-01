@@ -15,8 +15,14 @@ const CategoriesPage: React.FC<CategoriesPageProps> = ({ routeData }) => {
       <Helmet>
         <title>{routeData?.title}</title>
       </Helmet>
-      <Stack direction={"row"} justifyContent="space-between">
-        <Typography variant="h6">Categories</Typography>
+      <Stack
+        direction={"row"}
+        justifyContent="space-between"
+        alignContent={"center"}
+      >
+        <Typography variant="h6" margin={"auto 0"}>
+          Categories
+        </Typography>
         <AddNewCatgoriesButton />
       </Stack>
       <CategoriesList />
