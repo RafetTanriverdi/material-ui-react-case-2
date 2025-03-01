@@ -1,5 +1,5 @@
-import { CategoryProvider } from "@rt/context_tp/CategoryContext/CategoryContext";
-import { GlobalSnackbarProvider } from "@rt/context_tp/GlobalSnackbarProvider/GlobalSnackbarProvider";
+import { CategoryProvider } from "@rt/context/CategoryContext/CategoryContext";
+import { GlobalSnackbarProvider } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
 import React from "react";
 interface IndexProps {
   children: React.ReactNode;

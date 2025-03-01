@@ -7,7 +7,7 @@ import { ROUTES_ID } from "@rt/routes/routes-id";
 import { RTForm } from "@rt/components/Form/Index";
 import { RTInput } from "@rt/components/Inputs/Index";
 import { useLogin } from "@rt/hooks/authFunctions/useAuthMutations";
-import { useGlobalSnackbar } from "@rt/context_tp/GlobalSnackbarProvider/GlobalSnackbarProvider";
+import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
