@@ -6,7 +6,7 @@ import { Stepper, Step, StepLabel, Typography, Stack } from "@mui/material";
 import { RTButton } from "@rt/components/Buttons/Index";
 import { RTForm } from "@rt/components/Form/Index";
 import { RTInput } from "@rt/components/Inputs/Index";
-import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
+import { useGlobalSnackbar } from "@rt/context_tp/GlobalSnackbarProvider/GlobalSnackbarProvider";
 
 import {
   useForgotPassword,

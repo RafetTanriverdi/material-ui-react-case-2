@@ -3,8 +3,8 @@ import { RTButton } from "@rt/components/Buttons/Index";
 import StyledDrawer from "@rt/components/Drawer/Drawer";
 import { useDelete } from "@rt/hooks/crudFunctions/useDelete";
 import DeleteCategoriesPanel from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/Panels/DeleteCategoriesPanel";
-import { CategoryList } from "@rt/context/CategoryContext/CategoryContext";
-import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
+import { CategoryList } from "@rt/context_tp/CategoryContext/CategoryContext";
+import { useGlobalSnackbar } from "@rt/context_tp/GlobalSnackbarProvider/GlobalSnackbarProvider";
 
 const DeleteCategoriesDrawer = ({
   open,

@@ -1,7 +1,7 @@
 import StyledDrawer from "@rt/components/Drawer/Drawer";
 import ViewCategoriesPanel from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/Panels/ViewCategoriesPanel";
 import { useQueryClient } from "@tanstack/react-query";
-import { CategoryList } from "@rt/context/CategoryContext/CategoryContext";
+import { CategoryList } from "@rt/context_tp/CategoryContext/CategoryContext";
 
 const ViewCategoriesDrawer = ({
   open,

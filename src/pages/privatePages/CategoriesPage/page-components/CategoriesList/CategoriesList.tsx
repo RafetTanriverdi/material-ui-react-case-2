@@ -3,7 +3,7 @@ import { RTAlert } from "@rt/components/Alerts/Index";
 import { RTButton } from "@rt/components/Buttons/Index";
 import { RTLoading } from "@rt/components/Loading/Index";
 import Table from "@rt/components/Table/Table";
-import { CategoryList, useCategoryContext } from "@rt/context/CategoryContext/CategoryContext";
+import { CategoryList, useCategoryContext } from "@rt/context_tp/CategoryContext/CategoryContext";
 import DeleteCategoriesDrawer from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/Drawers/DeleteCategoriesDrawer";
 import EditCategoriesDrawer from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/Drawers/EditCategoriesDrawer";
 import ViewCategoriesDrawer from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/Drawers/ViewCategoriesDrawer";

@@ -5,8 +5,8 @@ import { Category } from "@rt/pages/privatePages/CategoriesPage/page-components/
 import { useEdit } from "@rt/hooks/crudFunctions/useEdit";
 import { ENDPOINTS } from "@rt/api/end-points";
 import { RTButton } from "@rt/components/Buttons/Index";
-import { CategoryList } from "@rt/context/CategoryContext/CategoryContext";
-import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
+import { CategoryList } from "@rt/context_tp/CategoryContext/CategoryContext";
+import { useGlobalSnackbar } from "@rt/context_tp/GlobalSnackbarProvider/GlobalSnackbarProvider";
 
 interface EditCategoriesDrawerProps {
   open: boolean;
