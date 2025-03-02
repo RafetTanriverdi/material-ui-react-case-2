@@ -4,9 +4,9 @@ import { useEdit } from "@rt/hooks/crudFunctions/useEdit";
 import { ENDPOINTS } from "@rt/api/end-points";
 import { RTButton } from "@rt/components/Buttons/Index";
 import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
-import { ProductList } from "@rt/pages/privatePages/ProductsPage/page-components/ProductsList/ProductsList";
 import { Product } from "@rt/pages/privatePages/ProductsPage/page-components/AddNewProducts/AddNewProductsButton";
 import EditProductsPanel from "@rt/pages/privatePages/ProductsPage/page-components/ProductsList/Panels/EditProductsPanel";
+import { ProductList } from "@rt/context/ProductContext/ProductContext";
 
 interface EditProductsDrawerProps {
   open: boolean;

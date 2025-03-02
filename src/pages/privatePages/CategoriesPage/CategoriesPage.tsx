@@ -1,10 +1,9 @@
 import { Stack, Typography } from "@mui/material";
+import { DynamicHelmet } from "@rt/components/Helmet/Helmet";
 import AddNewCatgoriesButton from "@rt/pages/privatePages/CategoriesPage/page-components/AddNewCategories/AddNewCatgoriesButton";
 import CategoriesList from "@rt/pages/privatePages/CategoriesPage/page-components/CategoriesList/CategoriesList";
 import { RouteType } from "@rt/routes/routes";
 import * as React from "react";
-import { Helmet } from "react-helmet";
-
 interface CategoriesPageProps {
   routeData: RouteType;
 }
@@ -12,9 +11,7 @@ interface CategoriesPageProps {
 const CategoriesPage: React.FC<CategoriesPageProps> = ({ routeData }) => {
   return (
     <>
-      <Helmet>
-        <title>{routeData?.title}</title>
-      </Helmet>
+   <DynamicHelmet title={routeData.title} />
       <Stack
         direction={"row"}
         justifyContent="space-between"

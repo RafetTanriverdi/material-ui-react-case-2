@@ -33,6 +33,12 @@ export const routes: RouteType[] = [
         title: "Products",
         path: "/products",
       },
+      {
+        id: ROUTES_ID.users,
+        filePath: "privatePages/UsersPage/UsersPage",
+        title: "Users",
+        path: "/users",
+      },
     ],
   },
   {
@@ -65,7 +71,6 @@ export const routes: RouteType[] = [
 export const FLAT_ROUTES = flattenRoutes(routes);
 const ROUTE_ID_MAP: Record<string, RouteType> = {};
 FLAT_ROUTES.map((el) => (ROUTE_ID_MAP[el.id] = el));
-
 
 export const getRoutePath = (routeId: string): string => {
   const routeInfo = ROUTE_ID_MAP[routeId];

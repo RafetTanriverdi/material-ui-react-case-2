@@ -32,6 +32,10 @@ const navItems = [
     title: "Dashboard",
   },
   {
+    id: ROUTES_ID.users,
+    title: "Users",
+  },
+  {
     id: ROUTES_ID.categories,
     title: "Categories",
   },

@@ -1,5 +1,7 @@
 import { CategoryProvider } from "@rt/context/CategoryContext/CategoryContext";
 import { GlobalSnackbarProvider } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
+import { ProductProvider } from "@rt/context/ProductContext/ProductContext";
+import { UserProvider } from "@rt/context/UserContext/UserContext";
 import React from "react";
 interface IndexProps {
   children: React.ReactNode;
@@ -7,7 +9,11 @@ interface IndexProps {
 const ContextIndex: React.FC<IndexProps> = ({ children }) => {
   return (
     <GlobalSnackbarProvider>
-      <CategoryProvider>{children}</CategoryProvider>
+      <CategoryProvider>
+        <UserProvider>
+          <ProductProvider>{children}</ProductProvider>
+        </UserProvider>
+      </CategoryProvider>
     </GlobalSnackbarProvider>
   );
 };

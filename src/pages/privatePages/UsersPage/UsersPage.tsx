@@ -1,15 +1,15 @@
 import { Stack, Typography } from "@mui/material";
 import { DynamicHelmet } from "@rt/components/Helmet/Helmet";
-import AddNewProductsButton from "@rt/pages/privatePages/ProductsPage/page-components/AddNewProducts/AddNewProductsButton";
-import ProductsList from "@rt/pages/privatePages/ProductsPage/page-components/ProductsList/ProductsList";
+import AddNewUsersButton from "@rt/pages/privatePages/UsersPage/page-components/AddNewUsers/AddNewUsersButton";
+import UsersList from "@rt/pages/privatePages/UsersPage/page-components/UsersList/UsersList";
 import { RouteType } from "@rt/routes/routes";
 import React from "react";
 
-interface ProductsPageProps {
+interface UserPageProps {
   routeData: RouteType;
 }
 
-const ProductsPage: React.FC<ProductsPageProps> = ({ routeData }) => {
+const UserPage: React.FC<UserPageProps> = ({ routeData }) => {
   return (
     <>
       <DynamicHelmet title={routeData.title} />
@@ -19,13 +19,13 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ routeData }) => {
         alignContent={"center"}
       >
         <Typography variant="h6" margin={"auto 0"}>
-          Products
+          Users
         </Typography>
-        <AddNewProductsButton />
+        <AddNewUsersButton />
       </Stack>
-      <ProductsList />
+      <UsersList />
     </>
   );
 };
 
-export default ProductsPage;
+export default UserPage;

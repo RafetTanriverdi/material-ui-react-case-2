@@ -2,8 +2,8 @@ import { ENDPOINTS } from "@rt/api/end-points";
 import { RTAlert } from "@rt/components/Alerts/Index";
 import Description from "@rt/components/Description/Description";
 import { RTLoading } from "@rt/components/Loading/Index";
+import { ProductList } from "@rt/context/ProductContext/ProductContext";
 import { useGet } from "@rt/hooks/crudFunctions/useGet";
-import { ProductList } from "@rt/pages/privatePages/ProductsPage/page-components/ProductsList/ProductsList";
 import React from "react";
 
 interface ViewProductsPanelProps {

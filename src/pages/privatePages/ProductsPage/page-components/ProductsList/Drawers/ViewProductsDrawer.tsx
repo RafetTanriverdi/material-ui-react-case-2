@@ -1,6 +1,6 @@
 import StyledDrawer from "@rt/components/Drawer/Drawer";
+import { ProductList } from "@rt/context/ProductContext/ProductContext";
 import ViewProductsPanel from "@rt/pages/privatePages/ProductsPage/page-components/ProductsList/Panels/ViewProductsPanel";
-import { ProductList } from "@rt/pages/privatePages/ProductsPage/page-components/ProductsList/ProductsList";
 import { useQueryClient } from "@tanstack/react-query";
 
 const ViewProductsDrawer = ({

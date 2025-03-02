@@ -1,5 +1,5 @@
 import Description from "@rt/components/Description/Description";
-import { ProductList } from "@rt/pages/privatePages/ProductsPage/page-components/ProductsList/ProductsList";
+import { ProductList } from "@rt/context/ProductContext/ProductContext";
 
 interface DeleteProductsPanelProps {
   data: ProductList;

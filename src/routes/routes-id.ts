@@ -8,4 +8,5 @@ export const ROUTES_ID = {
   privatePages: "privatePages",
   publicPages: "publicPages",
   forgotpassword: "forgotpassword",
+  users: "users",
 };

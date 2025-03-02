@@ -3,39 +3,39 @@ import { RTButton } from "@rt/components/Buttons/Index";
 import StyledDrawer from "@rt/components/Drawer/Drawer";
 import { useDelete } from "@rt/hooks/crudFunctions/useDelete";
 import { useGlobalSnackbar } from "@rt/context/GlobalSnackbarProvider/GlobalSnackbarProvider";
-import DeleteProductsPanel from "@rt/pages/privatePages/ProductsPage/page-components/ProductsList/Panels/DeleteProductsPanel";
-import { ProductList } from "@rt/context/ProductContext/ProductContext";
+import DeleteUsersPanel from "@rt/pages/privatePages/UsersPage/page-components/UsersList/Panels/DeleteUsersPanel";
+import { UserList } from "@rt/context/UserContext/UserContext";
 
-const DeleteProductsDrawer = ({
+const DeleteUsersDrawer = ({
   open,
   onClose,
   data,
 }: {
   open: boolean;
   onClose: () => void;
-  data: ProductList;
+  data: UserList;
 }) => {
   const { showSnackbar } = useGlobalSnackbar();
 
   const { deleteMutation } = useDelete({
-    endpoint: ENDPOINTS.PRODUCTS.DELETE.replace(":productId", data.productId),
-    invalidationKey: "products",
+    endpoint: ENDPOINTS.USERS.DELETE.replace(":userId", data.userId),
+    invalidationKey: "users",
     onSuccess: () => {
-      showSnackbar("Product successfully deleted!", "success");
+      showSnackbar("User successfully deleted!", "success");
       onClose();
     },
     onError: (error) => {
-      showSnackbar(`Product deletion failed! ${error.message}`, "error");
+      showSnackbar(`User deletion failed! ${error.message}`, "error");
       onClose();
     },
   });
 
   return (
     <StyledDrawer
-      title={`Delete Product: ${data.productName}`}
+      title={`Delete User: ${data.userName}`}
       open={open}
       onClose={onClose}
-      content={<DeleteProductsPanel data={data} />}
+      content={<DeleteUsersPanel data={data} />}
       footer={
         <RTButton.delete
           onClick={() => deleteMutation.mutate()}
@@ -49,4 +49,4 @@ const DeleteProductsDrawer = ({
   );
 };
 
-export default DeleteProductsDrawer;
+export default DeleteUsersDrawer;
